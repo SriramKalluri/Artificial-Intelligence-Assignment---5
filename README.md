@@ -26,22 +26,22 @@ python minimax.py
 
 ---
 
-### 2. `alphabeta.py` — Alpha-Beta Pruning
+### 2. `alpha_beta.py` — Alpha-Beta Pruning
 Same as Minimax but skips branches that can't possibly affect the final decision. Faster, same result.
 
 ```bash
-python alphabeta.py
+python alpha_beta.py
 ```
 
 **Key concept:** `alpha` = best score AI is guaranteed. `beta` = best score Human is guaranteed. If `beta <= alpha`, prune the branch.
 
 ---
 
-### 3. `heuristicalphabeta.py` — Heuristic Alpha-Beta (Depth-Limited)
+### 3. `alphabeta_heuristic.py` — Heuristic Alpha-Beta (Depth-Limited)
 Alpha-Beta with a depth limit. When the search hits the limit, it uses a **heuristic function** to estimate how good the board looks instead of searching further.
 
 ```bash
-python heuristicalphabeta.py
+python alphabeta_heuristic.py
 ```
 
 **Key concept:** Useful for complex games (chess, etc.) where you can't search all the way to the end. The heuristic here counts open winning lines.
@@ -59,22 +59,22 @@ python montecarlo.py
 
 ---
 
-### 5. `tripplanning.py` — Rule-Based Travel Recommender
+### 5. `trip_planning.py` — Rule-Based Travel Recommender
 An AI travel assistant. You enter your budget, climate preference, and interests, and it scores destinations from a small knowledge base and recommends the top 3.
 
 ```bash
-python tripplanning.py
+python trip_planning.py
 ```
 
 **Key concept:** Rule-based AI — no ML needed. Scoring based on attribute matching.
 
 ---
 
-### 6. `exampleKGandKB.py` — Knowledge Graph
+### 6. `KG_and_KB_example.py` — Knowledge Graph
 Builds a knowledge graph about animals using **NetworkX**. Nodes are entities (Dog, Bird, etc.) and edges are labelled relationships (is-a, has-property). Saves a visual PNG.
 
 ```bash
-python exampleKGandKB.py
+python KG_and_KB_example.py
 ```
 
 **Key concept:** Knowledge Graphs represent facts as (Subject, Relation, Object) triples. Querying = traversing edges.
@@ -99,9 +99,9 @@ python bayesian.py
 | File | Algorithm | Library |
 |------|-----------|---------|
 | minimax.py | Minimax | None |
-| alphabeta.py | Alpha-Beta Pruning | None |
-| heuristicalphabeta.py | Heuristic Alpha-Beta | None |
+| alpha_beta.py | Alpha-Beta Pruning | None |
+| alphabeta_heuristic.py | Heuristic Alpha-Beta | None |
 | montecarlo.py | MCTS | None (random) |
-| tripplanning.py | Rule-based AI | None |
-| exampleKGandKB.py | Knowledge Graph | networkx, matplotlib |
+| trip_planning.py | Rule-based AI | None |
+| KG_and_KB_example.py | Knowledge Graph | networkx, matplotlib |
 | bayesian.py | Bayesian Network | pgmpy |
