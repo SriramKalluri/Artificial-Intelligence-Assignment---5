@@ -1,0 +1,145 @@
+# exampleKGandKB.py
+# Simple Knowledge Graph using NetworkX
+
+
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+def build_graph():
+
+    # Directed graph
+    G = nx.DiGraph()
+
+    # Add nodes
+    nodes = [
+
+        "Animal",
+        "Mammal",
+        "Bird",
+
+        "Dog",
+        "Cat",
+        "Eagle",
+        "Penguin",
+
+        "Can Fly",
+        "Has Fur",
+        "Warm Blooded",
+        "Lays Eggs"
+    ]
+
+    G.add_nodes_from(nodes)
+
+    # Add relationships
+    relationships = [
+
+        ("Dog", "Mammal", "is-a"),
+        ("Cat", "Mammal", "is-a"),
+
+        ("Eagle", "Bird", "is-a"),
+        ("Penguin", "Bird", "is-a"),
+
+        ("Mammal", "Animal", "is-a"),
+        ("Bird", "Animal", "is-a"),
+
+        ("Mammal", "Has Fur", "has-property"),
+        ("Bird", "Lays Eggs", "has-property"),
+
+        ("Bird", "Warm Blooded", "has-property"),
+        ("Eagle", "Can Fly", "has-property")
+    ]
+
+    for source, target, relation in relationships:
+
+        G.add_edge(
+            source,
+            target,
+            relation=relation
+        )
+
+    return G
+
+
+def print_graph(G):
+
+    print("\nKnowledge Graph Relationships:\n")
+
+    for source, target, data in G.edges(data=True):
+
+        print(
+            f"{source} --[{data['relation']}]--> {target}"
+        )
+
+
+def query_graph(G, node):
+
+    print(f"\nInformation about {node}:\n")
+
+    if node not in G:
+
+        print("Node not found")
+        return
+
+    for neighbor in G.successors(node):
+
+        relation = G[node][neighbor]['relation']
+
+        print(
+            f"{node} --[{relation}]--> {neighbor}"
+        )
+
+
+def visualize_graph(G):
+
+    plt.figure(figsize=(10, 7))
+
+    pos = nx.spring_layout(G, seed=42)
+
+    # Draw graph
+    nx.draw(
+        G,
+        pos,
+        with_labels=True,
+        node_size=2500,
+        node_color="lightblue",
+        font_size=9,
+        arrows=True
+    )
+
+    # Edge labels
+    edge_labels = {
+
+        (u, v): d['relation']
+
+        for u, v, d in G.edges(data=True)
+    }
+
+    nx.draw_networkx_edge_labels(
+        G,
+        pos,
+        edge_labels=edge_labels
+    )
+
+    plt.title("Knowledge Graph")
+
+    plt.savefig("knowledge_graph.png")
+
+    print("\nGraph saved as knowledge_graph.png")
+
+    plt.show()
+
+
+if __name__ == "__main__":
+
+    graph = build_graph()
+
+    print_graph(graph)
+
+    # Example queries
+    query_graph(graph, "Dog")
+
+    query_graph(graph, "Bird")
+
+    # Visualize graph
+    visualize_graph(graph)
